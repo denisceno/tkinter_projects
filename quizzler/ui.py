@@ -21,11 +21,11 @@ class QuizzInterface:
         self.label = Label(text="Score: 0", fg="white", bg=THEME_COLOR)
         self.label.grid(column=1, row=0)
 
-        true_logo = PhotoImage(file="images/true.png")
+        true_logo = PhotoImage(file="quizzler/images/true.png")
         self.true_button = Button(image=true_logo, highlightthickness=0, command=self.true_pressed)
         self.true_button.grid(column=0, row=2)
 
-        false_logo = PhotoImage(file="images/false.png")
+        false_logo = PhotoImage(file="quizzler/images/false.png")
         self.false_button = Button(image=false_logo, highlightthickness=0, command=self.false_pressed)
         self.false_button.grid(column=1, row=2)
 

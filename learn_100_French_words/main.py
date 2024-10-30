@@ -10,9 +10,9 @@ BACKGROUND_COLOR = "#B1DDC6"
 to_learn = {}
 
 try:
-    pd_data = pd.read_csv("data/words_to_learn.csv")
+    pd_data = pd.read_csv("learn_100_French_words/data/french_words.csv")
 except FileNotFoundError:
-    original_data = pd.read_csv("data/french_words.csv")
+    original_data = pd.read_csv("learn_100_French_words/data/french_words.csv")
     to_learn = original_data.to_dict(orient="records")
 else:
     to_learn = pd_data.to_dict(orient="records")
@@ -30,8 +30,8 @@ def random_choice():
         canvas.itemconfig(words_text, text="You learned all the words!", fill="black")
         canvas.itemconfig(words_to_learn, text="😁😁😁😁😁😁😁😁")
         window.after_cancel(flip_timer)
-        if os.path.exists("data/words_to_learn.csv"):
-            os.remove("data/words_to_learn.csv")
+        if os.path.exists("learn_100_French_words/data/words_to_learn.csv"):
+            os.remove("learn_100_French_words/data/words_to_learn.csv")
         window.after(10000, window.quit)
 
     else:
@@ -54,7 +54,7 @@ def flip_card():
 def known_word():
     to_learn.remove(random_word)
     data = pd.DataFrame(to_learn)
-    data.to_csv("data/words_to_learn.csv", index=False)
+    data.to_csv("learn_100_French_words/data/words_to_learn.csv", index=False)
     random_choice()
 
 
@@ -66,8 +66,8 @@ window.config(padx=50, pady=50, background=BACKGROUND_COLOR)
 flip_timer = window.after(3000, func=flip_card)
 
 canvas = Canvas(width=800, height=526)
-fr_image = PhotoImage(file="images/card_front.png")
-eng_image = PhotoImage(file="images/card_back.png")
+fr_image = PhotoImage(file="learn_100_French_words/images/card_front.png")
+eng_image = PhotoImage(file="learn_100_French_words/images/card_back.png")
 can_image = canvas.create_image(400, 263, image=fr_image)
 canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
 canvas.grid(column=0, row=0, columnspan=2)
@@ -77,12 +77,12 @@ language_text = canvas.create_text(400, 180, text="French", font=("Ariel", 40, "
 words_text = canvas.create_text(400, 285, text="Text", font=("Ariel", 60, "bold"), fill="black")
 
 right_button_image = PhotoImage(
-    file="images/right.png")
+    file="learn_100_French_words/images/right.png")
 right_button = Button(image=right_button_image, highlightthickness=0, command=known_word)
 right_button.grid(column=0, row=1)
 
 wrong_button_image = PhotoImage(
-    file="images/wrong.png")
+    file="learn_100_French_words/images/wrong.png")
 wrong_button = Button(image=wrong_button_image, highlightthickness=0, command=random_choice)
 wrong_button.grid(column=1, row=1)
 
